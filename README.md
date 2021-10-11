@@ -82,6 +82,13 @@ $ sudo ovs-vsctl show
     ovs_version: "2.12.0"
 ```
 
+
+```
+$ sudo systemctl disable --now openvswitch
+$ vagrant up --provider=libvirt
+$ sudo systemctl enable --now openvswitch
+```
+
 # 2. Ubuntu
 ```
 $ sudo apt-get update
