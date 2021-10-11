@@ -82,9 +82,10 @@ $ sudo ovs-vsctl show
     ovs_version: "2.12.0"
 ```
 
-
+Next time, you might stop openvswitch-switch service before vagrant up.
 ```
 $ sudo systemctl disable --now openvswitch
+$ reboot
 $ vagrant up --provider=libvirt
 $ sudo systemctl enable --now openvswitch
 ```
@@ -167,6 +168,7 @@ a69599ba-c200-4138-963f-abf09e94655b
 Next time, you might stop openvswitch-switch service before vagrant up.
 ```
 $ sudo systemctl disable --now openvswitch-switch
+$ reboot
 $ vagrant up --provider=libvirt
 $ sudo systemctl enable --now openvswitch-switch
 ```
@@ -197,15 +199,7 @@ rtt min/avg/max/mdev = 0.948/1.606/3.264/0.959 ms
 
 # 4. Join the k8s cluster
 ```
-vagrant@master:~$ sudo kubectl get nodes
-NAME      STATUS   ROLES                  AGE     VERSION
-master    Ready    control-plane,master   7h56m   v1.22.2
-worker1   Ready    node                   7h56m   v1.22.2
-worker2   Ready    node                   7h56m   v1.22.2
-worker3   Ready    node                   7h56m   v1.22.2
 ```
 ```
-
-
 ```
 
