@@ -10,7 +10,7 @@
 |         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.8 |
 | worker2 | 192.168.33.102 | DELL precision T3620 (CentOS8)| 192.168.11.8 |
 |         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.8 |
-| worker3 | 192.168.33.102 | DELL precision T3620 (CentOS8)| 192.168.11.8 |
+| worker3 | 192.168.33.103 | DELL precision T3620 (CentOS8)| 192.168.11.8 |
 |         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.8 |
 | worker4 | 192.168.33.104 | DELL Optiplex 5050 (Ubuntu)| 192.168.11.27 |
 |         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL Optiplex 5050 (Ubuntu)| 192.168.11.27 |
