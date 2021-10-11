@@ -185,3 +185,17 @@ PING 192.168.33.105 (192.168.33.105) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.948/1.606/3.264/0.959 ms
 ```
 
+# 4. Join the k8s cluster
+```
+vagrant@master:~$ sudo kubectl get nodes
+NAME      STATUS   ROLES                  AGE     VERSION
+master    Ready    control-plane,master   7h56m   v1.22.2
+worker1   Ready    node                   7h56m   v1.22.2
+worker2   Ready    node                   7h56m   v1.22.2
+worker3   Ready    node                   7h56m   v1.22.2
+```
+```
+
+
+```
+
