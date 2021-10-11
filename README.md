@@ -14,6 +14,20 @@
 |         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL Optiplex 5050 (Ubuntu)| 192.168.11.27 |
 
 
+CentOS8
+```
+$ sudo dnf install -y epel-release
+$ sudo dnf install -y centos-release-openstack-train
+$ sudo dnf install openvswitch
+$ sudo systemctl enable --now openvswitch
+$ sudo ovs-vsctl show
+5c4bc60e-e5e6-450a-9a2a-53abd4cb3eb0
+    ovs_version: "2.12.0"
+
+
+```
+
+Ubuntu
 ```
 $ sudo apt-get update
 $ sudo apt-get install -y openvswitch-switch openvswitch-common
