@@ -1,5 +1,20 @@
 # openvswitch_install
 
+# 0. Goal
+
+| VM | IP | Host | IP |
+| --- | --- | --- | --- |
+| worker1 | 192.168.33.101 | DELL precision T3620 | 192.168.11.8 |
+| worker1 | 192.168.121.xxx | DELL precision T3620 | 192.168.11.8 |
+| worker2 | 192.168.33.102 | DELL precision T3620 | 192.168.11.8 |
+| worker2 | 192.168.121.xxx | DELL precision T3620 | 192.168.11.8 |
+| worker4 | 192.168.33.104 | DELL Optiplex 5050 | 192.168.11.27 |
+| worker4 | 192.168.121.xxx | DELL Optiplex 5050 | 192.168.11.27 |
+| worker5 | 192.168.33.105 | DELL Optiplex 5050 | 192.168.11.27 |
+| worker5 | 192.168.121.xxx | DELL Optiplex 5050 | 192.168.11.27 |
+
+
+```
 $ sudo apt-get update
 $ sudo apt-get install -y openvswitch-switch openvswitch-common
 
@@ -65,5 +80,5 @@ a69599ba-c200-4138-963f-abf09e94655b
                 type: gre
                 options: {remote_ip="192.168.11.8"}
     ovs_version: "2.13.3"
-
+```
 
