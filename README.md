@@ -50,6 +50,8 @@ $ sudo ovs-vsctl show
                 type: internal
     ovs_version: "2.12.0"
 
+$ sudo ovs-vsctl add-port br0 virbr1
+$ sudo ovs-vsctl add-port br0 virbr2
 $ sudo ovs-vsctl show
 5c4bc60e-e5e6-450a-9a2a-53abd4cb3eb0
     Bridge "br0"
@@ -62,6 +64,7 @@ $ sudo ovs-vsctl show
             Interface "virbr1"
     ovs_version: "2.12.0"
 
+$ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.27
 $ sudo ovs-vsctl show
 5c4bc60e-e5e6-450a-9a2a-53abd4cb3eb0
     Bridge "br0"
