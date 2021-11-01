@@ -148,23 +148,12 @@ a69599ba-c200-4138-963f-abf09e94655b
                 type: internal
         Port virbr2
             Interface virbr2
-        Port virbr1
-            Interface virbr1
         Port gre0
             Interface gre0
                 type: gre
                 options: {remote_ip="192.168.11.8"}
     ovs_version: "2.13.3"
 ```
-
-Next time, you might stop openvswitch-switch service before vagrant up.
-```
-$ sudo systemctl disable --now openvswitch-switch
-$ reboot
-$ vagrant up --provider=libvirt
-$ sudo systemctl enable --now openvswitch-switch
-```
-
 # 3. Ping between master and worker4,5
 ```
 vagrant@master:~$ ping 192.168.33.104
