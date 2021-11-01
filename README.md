@@ -50,7 +50,6 @@ $ sudo ovs-vsctl show
                 type: internal
     ovs_version: "2.12.0"
 
-$ sudo ovs-vsctl add-port br0 virbr1
 $ sudo ovs-vsctl add-port br0 virbr2
 $ sudo ovs-vsctl show
 5c4bc60e-e5e6-450a-9a2a-53abd4cb3eb0
@@ -60,8 +59,6 @@ $ sudo ovs-vsctl show
         Port "br0"
             Interface "br0"
                 type: internal
-        Port "virbr1"
-            Interface "virbr1"
     ovs_version: "2.12.0"
 
 $ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.27
@@ -77,8 +74,6 @@ $ sudo ovs-vsctl show
             Interface "gre0"
                 type: gre
                 options: {remote_ip="192.168.11.27"}
-        Port "virbr1"
-            Interface "virbr1"
     ovs_version: "2.12.0"
 ```
 
@@ -133,7 +128,6 @@ a69599ba-c200-4138-963f-abf09e94655b
                 type: internal
     ovs_version: "2.13.3"
 
-$ sudo ovs-vsctl add-port br0 virbr1
 $ sudo ovs-vsctl add-port br0 virbr2
 $ sudo ovs-vsctl show
 a69599ba-c200-4138-963f-abf09e94655b
@@ -143,8 +137,6 @@ a69599ba-c200-4138-963f-abf09e94655b
                 type: internal
         Port virbr2
             Interface virbr2
-        Port virbr1
-            Interface virbr1
     ovs_version: "2.13.3"
 
 $ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.8
@@ -197,7 +189,12 @@ PING 192.168.33.105 (192.168.33.105) 56(84) bytes of data.
 rtt min/avg/max/mdev = 0.948/1.606/3.264/0.959 ms
 ```
 
-# 4. Join the k8s cluster
+# 4. Change MTU size
+```
+# sudo ip link set eth1 mtu 1420
+```
+
+# 5. Join the k8s cluster
 ```
 ```
 ```
