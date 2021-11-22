@@ -216,6 +216,23 @@ helm install --wait --generate-name nvidia/gpu-operator
 # 9. Run face_recognizer
 ```
 git clone https://github.com/developer-onizuka/gpu-operator3
+
+# kubectl get pods -o wide
+NAME                                                              READY   STATUS    RESTARTS      AGE   IP              NODE      NOMINATED NODE   READINESS GATES
+facerecognizer-test-67d544f588-gpgb7                              2/2     Running   0             26s   10.10.215.15    worker9   <none>           <none>
+facerecognizer-test-67d544f588-w6p62                              2/2     Running   0             26s   10.10.235.151   worker1   <none>           <none>
+gpu-operator-1637593355-node-feature-discovery-master-75db6gr6c   2/2     Running   1 (36m ago)   38m   10.10.219.66    master    <none>           <none>
+gpu-operator-1637593355-node-feature-discovery-worker-fxlrq       2/2     Running   3 (37m ago)   38m   10.10.215.4     worker9   <none>           <none>
+gpu-operator-1637593355-node-feature-discovery-worker-pkjwr       2/2     Running   4 (37m ago)   38m   10.10.235.140   worker1   <none>           <none>
+gpu-operator-1637593355-node-feature-discovery-worker-zrgsl       2/2     Running   1 (36m ago)   38m   10.10.219.67    master    <none>           <none>
+gpu-operator-5f8b7c4f59-b4rnv                                     2/2     Running   1 (37m ago)   38m   10.10.219.65    master    <none>           <none>
+
+# kubectl get services
+NAME                                                    TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+facerecognizer-svc                                      ClusterIP   10.109.55.27    <none>        5000/TCP   4s
+gpu-operator                                            ClusterIP   10.109.95.20    <none>        8080/TCP   32m
+gpu-operator-1637593355-node-feature-discovery-master   ClusterIP   10.101.39.243   <none>        8080/TCP   34m
+kubernetes                                              ClusterIP   10.96.0.1       <none>        443/TCP    57m
 ```
 
 # X. Vagrantfiles
