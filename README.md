@@ -4,12 +4,12 @@
 
 | VM | IP | Host | IP |
 | --- | --- | --- | --- |
-| master  | 192.168.33.100 | DELL precision T3620 (CentOS8)| 192.168.11.8 |
-|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.8 |
-| worker1 | 192.168.33.101 | DELL precision T3620 (CentOS8)| 192.168.11.8 |
-|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.8 |
-| worker9 | 192.168.33.109 | DELL Optiplex 5050 (Ubuntu)| 192.168.11.27 |
-|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL Optiplex 5050 (Ubuntu)| 192.168.11.27 |
+| master  | 192.168.33.100 | DELL precision T3620 (CentOS8)| 192.168.11.15 |
+|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.15 |
+| worker1 | 192.168.33.101 | DELL precision T3620 (CentOS8)| 192.168.11.15 |
+|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.15 |
+| worker9 | 192.168.33.109 | DELL Optiplex 5050 (Ubuntu)| 192.168.11.23 |
+|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL Optiplex 5050 (Ubuntu)| 192.168.11.23 |
 
 # 1. CentOS8
 ```
@@ -54,7 +54,7 @@ $ sudo ovs-vsctl show
                 type: internal
     ovs_version: "2.12.0"
 
-$ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.27
+$ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.23
 $ sudo ovs-vsctl show
 5c4bc60e-e5e6-450a-9a2a-53abd4cb3eb0
     Bridge "br0"
@@ -66,7 +66,7 @@ $ sudo ovs-vsctl show
         Port "gre0"
             Interface "gre0"
                 type: gre
-                options: {remote_ip="192.168.11.27"}
+                options: {remote_ip="192.168.11.23"}
     ovs_version: "2.12.0"
 ```
 
@@ -132,7 +132,7 @@ a69599ba-c200-4138-963f-abf09e94655b
             Interface virbr2
     ovs_version: "2.13.3"
 
-$ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.8
+$ sudo ovs-vsctl add-port br0 gre0 -- set interface gre0 type=gre options:remote_ip=192.168.11.15
 $ sudo ovs-vsctl show
 a69599ba-c200-4138-963f-abf09e94655b
     Bridge br0
@@ -144,7 +144,7 @@ a69599ba-c200-4138-963f-abf09e94655b
         Port gre0
             Interface gre0
                 type: gre
-                options: {remote_ip="192.168.11.8"}
+                options: {remote_ip="192.168.11.15"}
     ovs_version: "2.13.3"
 ```
 # 3. Ping between master and worker9
