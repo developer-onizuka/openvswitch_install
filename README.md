@@ -260,16 +260,16 @@ EOF
       hashkey=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
       ssh vagrant@192.168.33.101 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
       #ssh vagrant@192.168.33.102 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
-      ssh vagrant@192.168.33.109 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
+      #ssh vagrant@192.168.33.109 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
       sudo kubectl label node worker1 node-role.kubernetes.io/node=worker1
-      sudo kubectl label node worker2 node-role.kubernetes.io/node=worker2
-      sudo kubectl label node worker9 node-role.kubernetes.io/node=worker9
-      #sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
-      sudo kubectl apply -f https://github.com/antrea-io/antrea/releases/download/v1.2.3/antrea.yml
+      #sudo kubectl label node worker2 node-role.kubernetes.io/node=worker2
+      #sudo kubectl label node worker9 node-role.kubernetes.io/node=worker9
+      sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
+      #sudo kubectl apply -f https://github.com/antrea-io/antrea/releases/download/v1.2.3/antrea.yml
       #sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
       cat <<EOF > /etc/rc.local
 #!/bin/sh
-sudo iptables -t nat -A POSTROUTING -s 0.0.0.0 -d 0.0.0.0 -j MASQUERADE
+#sudo iptables -t nat -A POSTROUTING -s 0.0.0.0 -d 0.0.0.0 -j MASQUERADE
 sudo ip link set eth1 mtu 1450
 EOF
       chmod 775 /etc/rc.local
