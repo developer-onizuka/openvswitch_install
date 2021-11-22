@@ -163,10 +163,62 @@ rtt min/avg/max/mdev = 1.016/1.678/3.524/1.065 ms
 
 # 4. Change MTU size
 ```
-# sudo ip link set eth1 mtu 1450
+sudo ip link set eth1 mtu 1450
 ```
 
 # 5. Join the k8s cluster
+```
+token=$(sudo kubeadm token list |tail -n 1 |awk '{print $1}')
+hashkey=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
+ssh vagrant@192.168.33.101 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
+ssh vagrant@192.168.33.109 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
+```
+
+# 6. Install Istio
+```
+cd /home/vagrant
+curl -L https://istio.io/downloadIstio | sh -
+export PATH="$PATH:/home/vagrant/istio-1.12.0/bin"
+istioctl install
+kubectl label namespaces default istio-injection=enabled
+kubectl get ns --show-labels
+```
+
+# 7. Install Metallb-system
+```
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
+kubectl get nodes -o wide
+cat <<EOF | kubectl create -f -
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: metallb-system
+  name: config
+data:
+  config: |
+    address-pools:
+    - name: default
+      protocol: layer2
+      addresses:
+      - 192.168.121.220-192.168.121.250
+EOF
+kubectl describe configmap config -n metallb-system
+```
+
+# 8. Install GPU operator
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && chmod 700 get_helm.sh && ./get_helm.sh
+helm repo add nvidia https://nvidia.github.io/gpu-operator && helm repo update
+helm install --wait --generate-name nvidia/gpu-operator
+```
+
+# 9. Run face_recognizer
+```
+git clone https://github.com/developer-onizuka/gpu-operator3
+```
+
+# X. Vagrantfiles
 ```
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
