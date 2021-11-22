@@ -147,38 +147,26 @@ a69599ba-c200-4138-963f-abf09e94655b
                 options: {remote_ip="192.168.11.8"}
     ovs_version: "2.13.3"
 ```
-# 3. Ping between master and worker4,5
+# 3. Ping between master and worker9
 ```
-vagrant@master:~$ ping 192.168.33.104
-PING 192.168.33.104 (192.168.33.104) 56(84) bytes of data.
-64 bytes from 192.168.33.104: icmp_seq=1 ttl=64 time=3.52 ms
-64 bytes from 192.168.33.104: icmp_seq=2 ttl=64 time=1.11 ms
-64 bytes from 192.168.33.104: icmp_seq=3 ttl=64 time=1.06 ms
-64 bytes from 192.168.33.104: icmp_seq=4 ttl=64 time=1.02 ms
+vagrant@master:~$ ping 192.168.33.109
+PING 192.168.33.109 (192.168.33.109) 56(84) bytes of data.
+64 bytes from 192.168.33.109: icmp_seq=1 ttl=64 time=3.52 ms
+64 bytes from 192.168.33.109: icmp_seq=2 ttl=64 time=1.11 ms
+64 bytes from 192.168.33.109: icmp_seq=3 ttl=64 time=1.06 ms
+64 bytes from 192.168.33.109: icmp_seq=4 ttl=64 time=1.02 ms
 ^C
---- 192.168.33.104 ping statistics ---
+--- 192.168.33.109 ping statistics ---
 4 packets transmitted, 4 received, 0% packet loss, time 3002ms
 rtt min/avg/max/mdev = 1.016/1.678/3.524/1.065 ms
-vagrant@master:~$ ping 192.168.33.105
-PING 192.168.33.105 (192.168.33.105) 56(84) bytes of data.
-64 bytes from 192.168.33.105: icmp_seq=1 ttl=64 time=3.26 ms
-64 bytes from 192.168.33.105: icmp_seq=2 ttl=64 time=0.948 ms
-64 bytes from 192.168.33.105: icmp_seq=3 ttl=64 time=1.15 ms
-64 bytes from 192.168.33.105: icmp_seq=4 ttl=64 time=1.07 ms
-^C
---- 192.168.33.105 ping statistics ---
-4 packets transmitted, 4 received, 0% packet loss, time 3008ms
-rtt min/avg/max/mdev = 0.948/1.606/3.264/0.959 ms
 ```
 
 # 4. Change MTU size
 ```
-# sudo ip link set eth1 mtu 1420
+# sudo ip link set eth1 mtu 1450
 ```
 
 # 5. Join the k8s cluster
-
-
 ```
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -200,17 +188,6 @@ Vagrant.configure("2") do |config|
     end
     server.vm.provision "shell", inline: <<-SHELL
       sudo ip link set eth1 mtu 1450
-      cat <<EOF > /etc/netplan/99_config.yaml
-network:
-  ethernets:
-    eth2:
-      dhcp4: false
-      addresses:
-         - 192.168.200.100/24
-  version: 2
-EOF
-      sudo ip a add 192.168.200.100/24 dev eth2
-      sudo ip link set eth2 up
       sudo swapoff -a
       sudo sed -i "/swap/d" /etc/fstab
       sudo cat <<EOF > /etc/modprobe.d/blacklist-nouveau.conf
@@ -267,15 +244,15 @@ EOF
       sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
       #sudo kubectl apply -f https://github.com/antrea-io/antrea/releases/download/v1.2.3/antrea.yml
       #sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
+      kubectl set env daemonset/calico-node -n kube-system IP_AUTODETECTION_METHOD=interface=eth0,eth1
       cat <<EOF > /etc/rc.local
 #!/bin/sh
-#sudo iptables -t nat -A POSTROUTING -s 0.0.0.0 -d 0.0.0.0 -j MASQUERADE
 sudo ip link set eth1 mtu 1450
 EOF
       chmod 775 /etc/rc.local
       sudo sed -i "/swap/d" /etc/fstab
       sudo cat /etc/fstab
-      sudo sed -i '2i \ \ "insecure-registries":["192.168.33.1:5000"],' /etc/docker/daemon.json
+      sudo sed -i '2i \ \ "insecure-registries":["192.168.121.1:5000"],' /etc/docker/daemon.json
     SHELL
   end
 #---------- worker1 ----------
@@ -293,20 +270,7 @@ EOF
     end
     server.vm.provision "shell", inline: <<-SHELL
       sudo ip link set eth1 mtu 1450
-      cat <<EOF > /etc/netplan/99_config.yaml
-network:
-  ethernets:
-    eth2:
-      dhcp4: false
-      addresses:
-         - 192.168.200.101/24
-  version: 2
-EOF
-      sudo ip a add 192.168.200.101/24 dev eth2
-      sudo ip link set eth2 up
       sudo swapoff -a
-      #sudo systemctl mask "swap.img.swap"
-      #sudo systemctl mask "dev-vda2.swap"
       sudo sed -i "/swap/d" /etc/fstab
       sudo cat <<EOF > /etc/modprobe.d/blacklist-nouveau.conf
 blacklist nouveau
@@ -337,13 +301,11 @@ EOF
       sudo apt-get install -y -q kubelet kubectl kubeadm
       cat <<EOF > /etc/rc.local
 #!/bin/sh
-#sudo iptables -t nat -A POSTROUTING -s 192.168.0.0/16 -j SNAT --to 192.168.33.101
-sudo iptables -t nat -A POSTROUTING -s 0.0.0.0 -d 0.0.0.0 -j MASQUERADE
 sudo ip link set eth1 mtu 1450
 EOF
       chmod 775 /etc/rc.local
       sudo sed -i "/swap/d" /etc/fstab
-      sudo sed -i '2i \ \ "insecure-registries":["192.168.33.1:5000"],' /etc/docker/daemon.json
+      sudo sed -i '2i \ \ "insecure-registries":["192.168.121.1:5000"],' /etc/docker/daemon.json
     SHELL
   end
 end
