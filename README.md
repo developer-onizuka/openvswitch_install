@@ -252,7 +252,7 @@ EOF
       chmod 775 /etc/rc.local
       sudo sed -i "/swap/d" /etc/fstab
       sudo cat /etc/fstab
-      sudo sed -i '2i \ \ "insecure-registries":["192.168.121.1:5000"],' /etc/docker/daemon.json
+      sudo sed -i '2i \ \ "insecure-registries":["192.168.11.15:5000"],' /etc/docker/daemon.json
     SHELL
   end
 #---------- worker1 ----------
@@ -305,7 +305,7 @@ sudo ip link set eth1 mtu 1450
 EOF
       chmod 775 /etc/rc.local
       sudo sed -i "/swap/d" /etc/fstab
-      sudo sed -i '2i \ \ "insecure-registries":["192.168.121.1:5000"],' /etc/docker/daemon.json
+      sudo sed -i '2i \ \ "insecure-registries":["192.168.11.15:5000"],' /etc/docker/daemon.json
     SHELL
   end
 end
@@ -366,7 +366,7 @@ sudo ip link set eth1 mtu 1450
 EOF
       chmod 775 /etc/rc.local
       sudo sed -i "/swap/d" /etc/fstab
-      sudo sed -i '2i \ \ "insecure-registries":["192.168.121.1:5000"],' /etc/docker/daemon.json
+      sudo sed -i '2i \ \ "insecure-registries":["192.168.11.15:5000"],' /etc/docker/daemon.json
     SHELL
   end
 #--------------------
