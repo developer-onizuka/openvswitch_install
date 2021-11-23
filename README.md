@@ -182,7 +182,7 @@ ssh vagrant@192.168.33.109 sudo kubeadm join 192.168.33.100:6443 --token $token 
 cd /home/vagrant
 curl -L https://istio.io/downloadIstio | sh -
 export PATH="$PATH:/home/vagrant/istio-1.12.0/bin"
-istioctl install
+echo y | istioctl install
 kubectl label namespaces default istio-injection=enabled
 kubectl get ns --show-labels
 ```
