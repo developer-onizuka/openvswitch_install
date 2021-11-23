@@ -253,6 +253,7 @@ metadata:
   name: istio
 spec:
   controller: istio.io/ingress-controller
+EOF
 ```
 
 # 11. Ingress for kiali and grafana
