@@ -221,7 +221,20 @@ helm repo add nvidia https://nvidia.github.io/gpu-operator && helm repo update
 helm install --wait --generate-name nvidia/gpu-operator
 ```
 
-# 9. Run face_recognizer with Ingress
+# 9. Istio Ingress Contoller
+- https://www.youtube.com/watch?v=VCIn-8-4FNM
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: istio
+spec:
+  controller: istio.io/ingress-controller
+EOF
+```
+
+# 10. Run face_recognizer with Ingress
 - https://www.youtube.com/watch?v=VCIn-8-4FNM
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
@@ -276,19 +289,6 @@ Events:                       <none>
     <a href="./nvidia-smi">nvidia-smi</a> <br>
   </body>
 </html>
-```
-
-# 10. Istio Ingress Contoller
-- https://www.youtube.com/watch?v=VCIn-8-4FNM
-```
-cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  name: istio
-spec:
-  controller: istio.io/ingress-controller
-EOF
 ```
 
 # 11. Ingress for kiali and grafana
