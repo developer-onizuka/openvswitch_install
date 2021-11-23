@@ -257,11 +257,11 @@ spec:
 EOF
 ```
 
-# 10. Istio Ingress Gateway
+# * Istio Ingress Gateway
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/
 
-# 11. Run face_recognizer with Istio Ingress
+# 10. Run face_recognizer with Istio Ingress
 The difference between "Kubernetes Ingress/Ingress Controller" and "Istio Ingress Gateway/Virtual Service"
 - https://www.youtube.com/watch?v=VCIn-8-4FNM
 ```
@@ -319,7 +319,7 @@ Events:                       <none>
 </html>
 ```
 
-# 12. Ingress for kiali and grafana
+# 11. Ingress for kiali and grafana
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -355,7 +355,7 @@ spec:
 EOF
 ```
 
-# 13. Edit /etc/hosts
+# 12. Edit /etc/hosts
 ```
 # kubectl get ingress -n istio-system
 NAME        CLASS   HOSTS                   ADDRESS           PORTS   AGE
