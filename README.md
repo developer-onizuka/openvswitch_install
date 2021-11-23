@@ -221,11 +221,11 @@ helm repo add nvidia https://nvidia.github.io/gpu-operator && helm repo update
 helm install --wait --generate-name nvidia/gpu-operator
 ```
 
-# 9. Run face_recognizer
+# 9. Run face_recognizer with Ingress
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
 cd openvswitch_install
-kubectl apply -f face_recognizer_istio.yaml
+kubectl apply -f face_recognizer_ingress.yaml
 ```
 ```
 # kubectl get pods -o wide
@@ -244,6 +244,24 @@ facerecognizer-svc                                      ClusterIP   10.109.55.27
 gpu-operator                                            ClusterIP   10.109.95.20    <none>        8080/TCP   32m
 gpu-operator-1637593355-node-feature-discovery-master   ClusterIP   10.101.39.243   <none>        8080/TCP   34m
 kubernetes                                              ClusterIP   10.96.0.1       <none>        443/TCP    57m
+
+# kubectl get ingress
+NAME             CLASS   HOSTS                        ADDRESS           PORTS   AGE
+facerecognizer   istio   facerecognizer.example.com   192.168.121.220   80      27m
+
+# echo "192.168.121.220 facerecognizer.example.com" >> /etc/hosts
+
+# curl facerecognizer.example.com
+<html>
+  <head>
+    <title>Wellcome</title>
+  </head>
+  <body>
+    <h1>Wellcome</h1>
+    <a href="./stream">Face Recognizer</a> <br>
+    <a href="./nvidia-smi">nvidia-smi</a> <br>
+  </body>
+</html>
 ```
 
 # 10. Istio Ingress Contoller
