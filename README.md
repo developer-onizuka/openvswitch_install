@@ -222,6 +222,7 @@ helm install --wait --generate-name nvidia/gpu-operator
 ```
 
 # 9. Run face_recognizer with Ingress
+- https://www.youtube.com/watch?v=VCIn-8-4FNM
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
 cd openvswitch_install
@@ -278,6 +279,7 @@ Events:                       <none>
 ```
 
 # 10. Istio Ingress Contoller
+- https://www.youtube.com/watch?v=VCIn-8-4FNM
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
