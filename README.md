@@ -249,6 +249,19 @@ kubernetes                                              ClusterIP   10.96.0.1   
 NAME             CLASS   HOSTS                        ADDRESS           PORTS   AGE
 facerecognizer   istio   facerecognizer.example.com   192.168.121.220   80      27m
 
+# kubectl describe ingress facerecognizer
+Name:             facerecognizer
+Namespace:        default
+Address:          192.168.121.220
+Default backend:  APIGroup: facerecognizer.example.com, Kind: StorageBucket, Name: static-assets
+Rules:
+  Host                        Path  Backends
+  ----                        ----  --------
+  facerecognizer.example.com  
+                              /   facerecognizer-svc:5000 (10.10.215.34:5000,10.10.235.148:5000)
+Annotations:                  <none>
+Events:                       <none>
+
 # echo "192.168.121.220 facerecognizer.example.com" >> /etc/hosts
 
 # curl facerecognizer.example.com
