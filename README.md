@@ -210,6 +210,7 @@ kubectl label namespaces default istio-injection=enabled
 kubectl get ns --show-labels
 cd istio-1.12.0/samples/addons
 kubectl apply -f .
+cd -
 ```
 
 # 8. Install GPU operator
