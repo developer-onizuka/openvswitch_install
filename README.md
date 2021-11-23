@@ -358,7 +358,7 @@ EOF
       mkdir -p $HOME/.kube
       sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
       sudo chown $(id -u):$(id -g) $HOME/.kube/config
-      sudo kubectl taint nodes --all node-role.kubernetes.io/master-
+      #sudo kubectl taint nodes --all node-role.kubernetes.io/master-
       token=$(sudo kubeadm token list |tail -n 1 |awk '{print $1}')
       hashkey=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
       ssh vagrant@192.168.33.101 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
@@ -370,7 +370,8 @@ EOF
       sudo kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
       #sudo kubectl apply -f https://github.com/antrea-io/antrea/releases/download/v1.2.3/antrea.yml
       #sudo kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-      kubectl set env daemonset/calico-node -n kube-system IP_AUTODETECTION_METHOD=interface=eth0,eth1
+      #kubectl set env daemonset/calico-node -n kube-system IP_AUTODETECTION_METHOD=interface=eth0,eth1
+      kubectl set env daemonset/calico-node -n kube-system IP_AUTODETECTION_METHOD=can-reach=192.168.33.1
       cat <<EOF > /etc/rc.local
 #!/bin/sh
 sudo ip link set eth1 mtu 1450
