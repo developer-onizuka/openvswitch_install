@@ -177,19 +177,7 @@ ssh vagrant@192.168.33.101 sudo kubeadm join 192.168.33.100:6443 --token $token 
 ssh vagrant@192.168.33.109 sudo kubeadm join 192.168.33.100:6443 --token $token --discovery-token-ca-cert-hash sha256:$hashkey
 ```
 
-# 6. Install Istio
-```
-cd /home/vagrant
-curl -L https://istio.io/downloadIstio | sh -
-export PATH="$PATH:/home/vagrant/istio-1.12.0/bin"
-echo y | istioctl install
-kubectl label namespaces default istio-injection=enabled
-kubectl get ns --show-labels
-cd istio-1.12.0/samples/addons
-kubectl apply -f .
-```
-
-# 7. Install Metallb-system
+# 6. Install Metallb-system
 ```
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/namespace.yaml
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.11.0/manifests/metallb.yaml
@@ -209,6 +197,18 @@ data:
       - 192.168.121.220-192.168.121.250
 EOF
 kubectl describe configmap config -n metallb-system
+```
+
+# 7. Install Istio
+```
+cd /home/vagrant
+curl -L https://istio.io/downloadIstio | sh -
+export PATH="$PATH:/home/vagrant/istio-1.12.0/bin"
+echo y | istioctl install
+kubectl label namespaces default istio-injection=enabled
+kubectl get ns --show-labels
+cd istio-1.12.0/samples/addons
+kubectl apply -f .
 ```
 
 # 8. Install GPU operator
