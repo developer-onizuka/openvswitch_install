@@ -240,6 +240,39 @@ gpu-operator                                            ClusterIP   10.109.95.20
 gpu-operator-1637593355-node-feature-discovery-master   ClusterIP   10.101.39.243   <none>        8080/TCP   34m
 kubernetes                                              ClusterIP   10.96.0.1       <none>        443/TCP    57m
 ```
+# 10. Ingress
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: myingress
+  namespace: istio-system
+spec:
+  defaultBackend:
+    resource:
+      apiGroup: myingress.com
+      kind: StorageBucket
+      name: static-assets
+  rules:
+  - host: myingress.com
+    http:
+      paths:
+      - path: /kiali
+        pathType: Prefix
+        backend: 
+          service:
+            name: kiali
+            port:
+              number: 20001
+      - path: /grafana
+        pathType: Prefix
+        backend: 
+          service:
+            name: grafana
+            port:
+              number: 3000
+```
 
 # X. Vagrantfiles
 - Master/Worker1 (Ubuntu)
