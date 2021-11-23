@@ -266,6 +266,7 @@ EOF
 The difference between "Kubernetes Ingress/Ingress Controller" and "Istio Ingress Gateway/Virtual Service"
 - https://www.youtube.com/watch?v=VCIn-8-4FNM
 - https://www.mirantis.com/blog/your-app-deserves-more-than-kubernetes-ingress-kubernetes-ingress-vs-istio-gateway-webinar/
+- https://medium.com/@zhaohuabing/which-one-is-the-right-choice-for-the-ingress-gateway-of-your-service-mesh-21a280d4a29c
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
 cd openvswitch_install
