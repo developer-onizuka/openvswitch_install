@@ -1,0 +1,95 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: facerecognizer-gateway
+spec:
+  selector:
+    istio: ingressgateway # use Istio default gateway implementation
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "*"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: facerecognizer-vsvc
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - facerecognizer-gateway
+  http:
+  - match:
+    - uri:
+        prefix: ""
+    route:
+    - destination:
+        port:
+          number: 5000
+        host: facerecognizer-svc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: facerecognizer-svc
+  labels:
+    app: facerecognizer-svc
+spec:
+  ports:
+  - port: 5000
+    targetPort: 5000
+    protocol: TCP
+    name: http
+  selector:
+    app: facerecognizer-test
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: facerecognizer-test
+spec:
+  selector:
+    matchLabels:
+      app: facerecognizer-test
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: facerecognizer-test
+    spec:
+      containers:
+      - name: facerecognizer-test
+        image: 192.168.11.15:5000/face_recognizer:1.0.1
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+             nvidia.com/gpu: 1
+        securityContext:
+          privileged: true
+        volumeMounts:
+          - name: tmp
+            mountPath: /tmp/test
+          - name: x11
+            mountPath: /tmp/.X11-unix
+          - name: xauthority
+            mountPath: /root/.Xauthority
+          - name: dev-video0
+            mountPath: /dev/video0
+      volumes:
+        - name: tmp
+          hostPath:
+            path: /mnt
+        - name: x11
+          hostPath:
+            path: /tmp/.X11-unix
+        - name: xauthority
+          hostPath:
+            path: /root/.Xauthority
+        - name: dev-video0
+          hostPath:
+            path: /dev/video0
