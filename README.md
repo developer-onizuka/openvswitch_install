@@ -4,10 +4,10 @@
 
 | VM | IP | Host | IP |
 | --- | --- | --- | --- |
-| master  | 192.168.33.100 | DELL precision T3620 (CentOS8)| 192.168.11.15 |
-|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.15 |
-| worker1 | 192.168.33.101 | DELL precision T3620 (CentOS8)| 192.168.11.15 |
-|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8)| 192.168.11.15 |
+| master  | 192.168.33.100 | DELL precision T3620 (CentOS8 or Ubuntu)| 192.168.11.15 |
+|         | 192.168.121.xxx (Internal IP in k8s cluster or Ubuntu)| DELL precision T3620 (CentOS8 or Ubuntu)| 192.168.11.15 |
+| worker1 | 192.168.33.101 | DELL precision T3620 (CentOS8 or Ubuntu)| 192.168.11.15 |
+|         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL precision T3620 (CentOS8 or Ubuntu)| 192.168.11.15 |
 | worker9 | 192.168.33.109 | DELL Optiplex 5050 (Ubuntu)| 192.168.11.23 |
 |         | 192.168.121.xxx (Internal IP in k8s cluster)| DELL Optiplex 5050 (Ubuntu)| 192.168.11.23 |
 
@@ -236,6 +236,7 @@ kubernetes                                              ClusterIP   10.96.0.1   
 ```
 
 # X. Vagrantfiles
+- Master/Worker1 (Ubuntu)
 ```
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
@@ -379,6 +380,7 @@ EOF
   end
 end
 ```
+- Worker9 (Ubuntu)
 ```
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
