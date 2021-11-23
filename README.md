@@ -260,6 +260,7 @@ EOF
 # * Istio Ingress Gateway
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/
+- https://qiita.com/J_Shell/items/296cd00569b0c7692be7
 
 # 10. Run face_recognizer with Istio Ingress
 The difference between "Kubernetes Ingress/Ingress Controller" and "Istio Ingress Gateway/Virtual Service"
