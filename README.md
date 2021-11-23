@@ -210,6 +210,7 @@ kubectl describe configmap config -n metallb-system
 ```
 
 # 8. Install GPU operator
+- https://github.com/developer-onizuka/gpu-operator3
 ```
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 && chmod 700 get_helm.sh && ./get_helm.sh
 helm repo add nvidia https://nvidia.github.io/gpu-operator && helm repo update
