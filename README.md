@@ -268,6 +268,7 @@ EOF
 - https://medium.com/@zhaohuabing/which-one-is-the-right-choice-for-the-ingress-gateway-of-your-service-mesh-21a280d4a29c
 
 
+
 # 10. Run face_recognizer with Istio Ingress (Not Ingress Gateway)
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
