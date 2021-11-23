@@ -273,6 +273,7 @@ spec:
             name: grafana
             port:
               number: 3000
+EOF
 ```
 
 # X. Vagrantfiles
