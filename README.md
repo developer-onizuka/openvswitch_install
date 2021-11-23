@@ -215,8 +215,11 @@ helm install --wait --generate-name nvidia/gpu-operator
 
 # 9. Run face_recognizer
 ```
-git clone https://github.com/developer-onizuka/gpu-operator3
-
+git clone https://github.com/developer-onizuka/openvswitch_install
+cd openvswitch_install
+kubectl apply -f face_recognizer_istio.yaml
+```
+```
 # kubectl get pods -o wide
 NAME                                                              READY   STATUS    RESTARTS      AGE   IP              NODE      NOMINATED NODE   READINESS GATES
 facerecognizer-test-67d544f588-gpgb7                              2/2     Running   0             26s   10.10.215.15    worker9   <none>           <none>
