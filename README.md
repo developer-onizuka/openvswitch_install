@@ -170,6 +170,7 @@ sudo ip link set eth1 mtu 1450
 ```
 
 # 5. Join the k8s cluster
+- https://github.com/developer-onizuka/gpu-operator3
 ```
 token=$(sudo kubeadm token list |tail -n 1 |awk '{print $1}')
 hashkey=$(openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null | openssl dgst -sha256 -hex | sed 's/^.* //')
