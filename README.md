@@ -185,6 +185,8 @@ export PATH="$PATH:/home/vagrant/istio-1.12.0/bin"
 echo y | istioctl install
 kubectl label namespaces default istio-injection=enabled
 kubectl get ns --show-labels
+cd istio-1.12.0/samples/addons
+kubectl apply -f .
 ```
 
 # 7. Install Metallb-system
