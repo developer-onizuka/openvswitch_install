@@ -221,7 +221,13 @@ helm repo add nvidia https://nvidia.github.io/gpu-operator && helm repo update
 helm install --wait --generate-name nvidia/gpu-operator
 ```
 
-# 9. Istio Ingress Contoller
+# 9. Ingress Controller
+- https://kubernetes.io/docs/concepts/services-networking/ingress-controllers/
+- https://christina04.hatenablog.com/entry/nginx-ingress-controller
+
+There are so many Ingress Controllers above. But I'll use Istio or Nginx Ingress Controller as followings:
+
+# 9-1. Istio Ingress Controller
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/kubernetes-ingress/
 ```
 cat <<EOF | kubectl apply -f -
@@ -234,7 +240,7 @@ spec:
 EOF
 ```
 
-# 9.1 Nginx Ingress Contoller
+# 9-2. Nginx Ingress Controller
 - https://kubernetes.github.io/ingress-nginx/
 ```
 cat <<EOF | kubectl apply -f -
@@ -251,7 +257,12 @@ spec:
 EOF
 ```
 
-# 10. Run face_recognizer with Ingress
+# 10. Istio Ingress Gateway
+- https://istio.io/latest/docs/tasks/traffic-management/ingress/
+- https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/
+
+# 11. Run face_recognizer with Istio Ingress
+The difference between "Kubernetes Ingress/Ingress Controller" and "Istio Ingress Gateway/Virtual Service"
 - https://www.youtube.com/watch?v=VCIn-8-4FNM
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
@@ -308,7 +319,7 @@ Events:                       <none>
 </html>
 ```
 
-# 11. Ingress for kiali and grafana
+# 12. Ingress for kiali and grafana
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -344,7 +355,7 @@ spec:
 EOF
 ```
 
-# 12. Edit /etc/hosts
+# 13. Edit /etc/hosts
 ```
 # kubectl get ingress -n istio-system
 NAME        CLASS   HOSTS                   ADDRESS           PORTS   AGE
