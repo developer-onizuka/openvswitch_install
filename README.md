@@ -268,11 +268,11 @@ spec:
   ingressClassName: istio
   defaultBackend:
     resource:
-      apiGroup: myingress.com
+      apiGroup: myingress.example.com
       kind: StorageBucket
       name: static-assets
   rules:
-  - host: myingress.com
+  - host: myingress.example.com
     http:
       paths:
       - path: /kiali
@@ -295,14 +295,14 @@ EOF
 # 12. Edit /etc/hosts
 ```
 # kubectl get ingress -n istio-system
-NAME        CLASS   HOSTS           ADDRESS           PORTS   AGE
-myingress   istio   myingress.com   192.168.121.220   80      5m24s
+NAME        CLASS   HOSTS                   ADDRESS           PORTS   AGE
+myingress   istio   myingress.example.com   192.168.121.220   80      5m24s
 
 # kubectl describe ingress myingress -n istio-system
 Name:             myingress
 Namespace:        istio-system
 Address:          192.168.121.220
-Default backend:  APIGroup: myingress.com, Kind: StorageBucket, Name: static-assets
+Default backend:  APIGroup: myingress.example.com, Kind: StorageBucket, Name: static-assets
 Rules:
   Host           Path  Backends
   ----           ----  --------
@@ -312,7 +312,7 @@ Rules:
 Annotations:     <none>
 Events:          <none>
 
-# cat "192.168.121.220 myingress.com" >> /etc/hosts
+# cat "192.168.121.220 myingress.example.com" >> /etc/hosts
 ```
 
 # X. Vagrantfiles
