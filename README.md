@@ -69,12 +69,9 @@ $ sudo ovs-vsctl show
                 options: {remote_ip="192.168.11.23"}
     ovs_version: "2.12.0"
 ```
-
-Next time, you might stop openvswitch-switch service before vagrant up.
+- How to enable/disable openvswitch daemon on CentOS/8
 ```
 $ sudo systemctl disable --now openvswitch
-$ reboot
-$ vagrant up --provider=libvirt
 $ sudo systemctl enable --now openvswitch
 ```
 
@@ -147,6 +144,12 @@ a69599ba-c200-4138-963f-abf09e94655b
                 options: {remote_ip="192.168.11.15"}
     ovs_version: "2.13.3"
 ```
+- How to enable/disable openvswitch daemon on Ubuntu
+```
+$ sudo sudo systemctl disable --now openvswitch-switch
+$ sudo sudo systemctl enable --now openvswitch-switch
+```
+
 # 3. Ping between master and worker9
 ```
 vagrant@master:~$ ping 192.168.33.109
