@@ -314,7 +314,7 @@ Rules:
 Annotations:     <none>
 Events:          <none>
 
-# cat "192.168.121.220 myingress.example.com" >> /etc/hosts
+# echo "192.168.121.220 myingress.example.com" >> /etc/hosts
 ```
 
 # X. Vagrantfiles
