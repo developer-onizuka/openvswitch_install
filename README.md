@@ -222,7 +222,7 @@ helm install --wait --generate-name nvidia/gpu-operator
 ```
 
 # 9. Istio Ingress Contoller
-- https://www.youtube.com/watch?v=VCIn-8-4FNM
+- https://istio.io/latest/docs/tasks/traffic-management/ingress/kubernetes-ingress/
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
@@ -231,6 +231,23 @@ metadata:
   name: istio
 spec:
   controller: istio.io/ingress-controller
+EOF
+```
+
+# 9.1 Nginx Ingress Contoller
+- https://kubernetes.github.io/ingress-nginx/
+```
+cat <<EOF | kubectl apply -f -
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  labels:
+    app.kubernetes.io/component: controller
+  name: nginx
+  annotations:
+    ingressclass.kubernetes.io/is-default-class: "true"
+spec:
+  controller: k8s.io/ingress-nginx
 EOF
 ```
 
