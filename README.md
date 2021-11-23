@@ -265,6 +265,7 @@ EOF
 # 10. Run face_recognizer with Istio Ingress
 The difference between "Kubernetes Ingress/Ingress Controller" and "Istio Ingress Gateway/Virtual Service"
 - https://www.youtube.com/watch?v=VCIn-8-4FNM
+- https://www.mirantis.com/blog/your-app-deserves-more-than-kubernetes-ingress-kubernetes-ingress-vs-istio-gateway-webinar/
 ```
 git clone https://github.com/developer-onizuka/openvswitch_install
 cd openvswitch_install
