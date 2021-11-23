@@ -292,6 +292,29 @@ spec:
 EOF
 ```
 
+# 12. Edit /etc/hosts
+```
+# kubectl get ingress -n istio-system
+NAME        CLASS   HOSTS           ADDRESS           PORTS   AGE
+myingress   istio   myingress.com   192.168.121.220   80      5m24s
+
+# kubectl describe ingress myingress -n istio-system
+Name:             myingress
+Namespace:        istio-system
+Address:          192.168.121.220
+Default backend:  APIGroup: myingress.com, Kind: StorageBucket, Name: static-assets
+Rules:
+  Host           Path  Backends
+  ----           ----  --------
+  myingress.com  
+                 /kiali     kiali:20001 (10.10.215.4:20001)
+                 /grafana   grafana:3000 (10.10.215.2:3000)
+Annotations:     <none>
+Events:          <none>
+
+# cat "192.168.121.220 myingress.com" >> /etc/hosts
+```
+
 # X. Vagrantfiles
 - Master/Worker1 (Ubuntu)
 ```
