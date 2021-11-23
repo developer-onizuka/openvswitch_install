@@ -240,7 +240,7 @@ gpu-operator                                            ClusterIP   10.109.95.20
 gpu-operator-1637593355-node-feature-discovery-master   ClusterIP   10.101.39.243   <none>        8080/TCP   34m
 kubernetes                                              ClusterIP   10.96.0.1       <none>        443/TCP    57m
 ```
-# 10. Ingress
+# 10. Ingress for kiali and grafana
 ```
 cat <<EOF | kubectl apply -f -
 apiVersion: networking.k8s.io/v1
