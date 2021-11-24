@@ -241,20 +241,11 @@ EOF
 ```
 
 # 9-2. Nginx Ingress Controller
-- https://kubernetes.github.io/ingress-nginx/
+- https://kubernetes.github.io/ingress-nginx/deploy/#quick-start
 ```
-cat <<EOF | kubectl apply -f -
-apiVersion: networking.k8s.io/v1
-kind: IngressClass
-metadata:
-  labels:
-    app.kubernetes.io/component: controller
-  name: nginx
-  annotations:
-    ingressclass.kubernetes.io/is-default-class: "true"
-spec:
-  controller: k8s.io/ingress-nginx
-EOF
+helm upgrade --install ingress-nginx ingress-nginx \
+  --repo https://kubernetes.github.io/ingress-nginx \
+  --namespace ingress-nginx --create-namespace
 ```
 
 # * Istio Ingress Gateway
