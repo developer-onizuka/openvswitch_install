@@ -318,6 +318,10 @@ Events:                       <none>
 
 # 10-1. Case of Nginx Ingress
 ```
+# git clone https://github.com/developer-onizuka/openvswitch_install
+# cd openvswitch_install
+# kubectl apply -f face_recognizer_nginx-ingress.yaml
+
 # kubectl get ingress
 NAME             CLASS   HOSTS                                          ADDRESS           PORTS   AGE
 facerecognizer   nginx   facerecognizer.example.com,nginx.example.com   192.168.121.221   80      21m
