@@ -321,6 +321,7 @@ Events:                       <none>
 # git clone https://github.com/developer-onizuka/openvswitch_install
 # cd openvswitch_install
 # kubectl apply -f face_recognizer_nginx-ingress.yaml
+# kubectl apply -f nginx_istio.yaml
 
 # kubectl get ingress
 NAME             CLASS   HOSTS                                          ADDRESS           PORTS   AGE
