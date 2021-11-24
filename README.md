@@ -316,6 +316,71 @@ Events:                       <none>
 </html>
 ```
 
+# 10-1. Case of Nginx Ingress
+```
+# kubectl get ingress
+NAME             CLASS   HOSTS                                          ADDRESS           PORTS   AGE
+facerecognizer   nginx   facerecognizer.example.com,nginx.example.com   192.168.121.221   80      21m
+
+# kubectl describe ingress facerecognizer
+Name:             facerecognizer
+Namespace:        default
+Address:          192.168.121.221
+Default backend:  APIGroup: facerecognizer.example.com, Kind: StorageBucket, Name: static-assets
+Rules:
+  Host                        Path  Backends
+  ----                        ----  --------
+  facerecognizer.example.com  
+                              /   facerecognizer-svc:5000 (10.10.215.12:5000,10.10.235.146:5000)
+  nginx.example.com           
+                              /   nginx-svc:8080 (10.10.45.201:80)
+Annotations:                  <none>
+Events:
+  Type    Reason  Age                From                      Message
+  ----    ------  ----               ----                      -------
+  Normal  Sync    21m (x2 over 21m)  nginx-ingress-controller  Scheduled for sync
+  Normal  Sync    16m                nginx-ingress-controller  Scheduled for sync
+
+# echo "192.168.121.221 facerecognizer.example.com nginx.example.com" >> /etc/hosts
+
+# curl facerecognizer.example.com
+<html>
+  <head>
+    <title>Wellcome</title>
+  </head>
+  <body>
+    <h1>Wellcome</h1>
+    <a href="./stream">Face Recognizer</a> <br>
+    <a href="./nvidia-smi">nvidia-smi</a> <br>
+  </body>
+</html>
+
+# curl nginx.example.com
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+html { color-scheme: light dark; }
+body { width: 35em; margin: 0 auto;
+font-family: Tahoma, Verdana, Arial, sans-serif; }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
+
 # 11. Ingress for kiali and grafana
 ```
 cat <<EOF | kubectl apply -f -
