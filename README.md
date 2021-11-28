@@ -248,6 +248,11 @@ helm upgrade --install ingress-nginx ingress-nginx \
   --namespace ingress-nginx --create-namespace
 ```
 
+If you wanna uninstall, then you might use the command below:
+```
+helm delete $(helm ls -n ingress-nginx | awk '/ingress-nginx/{print $1}') -n ingress-nginx
+```
+
 # * Istio Ingress Gateway
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/
 - https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/
